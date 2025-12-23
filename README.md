@@ -1,2 +1,2 @@
-# interactive-star-fiel
-## [View Website](bathyalecho.neocities.org)
+# interactive-star-field
+## [View Website](https://www.bathyalecho.neocities.org)
