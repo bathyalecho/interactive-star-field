@@ -3,8 +3,8 @@ const ctx = canvas.getContext('2d');
 
 
 function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
 }
 
 resize();
@@ -14,37 +14,41 @@ console.log('canvas width is: ', canvas.width, 'canvas height is: ', canvas.heig
 
 const stars = [];
 const numStars = 400;
+const centerX = canvas.width / 2;
+const centerY = canvas.height / 2;
 
 for (let i = 0; i < numStars; i++) {
 	stars.push({
-		x: Math.random() * canvas.width,
-		y: Math.random() * canvas.height,
+		angle: Math.random() * Math.PI * 2,
+		distance: Math.random() * canvas.width / 2,
 		size: Math.random() * 2,
-		speed: Math.random() * 2 + 0.5
+		speed: Math.random() * 2 
 	});
 }
 
-console.log(stars)
-
 function animate() {
-  // Clear canvas
-  ctx.fillStyle = 'black';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+	ctx.fillStyle = 'black';
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Update and draw each star
+
   for (const star of stars) {
-    // Move star down
-    star.y += star.speed;
+	star.distance += star.speed;
+	
+	const x = centerX + Math.cos(star.angle) * star.distance;
+	const y = centerY + Math.sin(star.angle) * star.distance;
+	
+	console.log("X is ", x)
+	console.log("Y is ", y)
 
-    // Reset to top if off screen
-    if (star.y > canvas.height) {
-      star.y = 0;
-      star.x = Math.random() * canvas.width;
+	if (x < 0 || x > canvas .width || y < 0 || y > canvas.height) {
+		star.distance = 0;
+		star.angle = Math.random() * Math.PI * 2;
     }
 
-    // Draw star
-    ctx.fillStyle = 'white';
-    ctx.fillRect(star.x, star.y, star.size, star.size);
+
+	const size = star.size * (star.distance / 200 + 0.5);
+	ctx.fillStyle = 'white';
+	ctx.fillRect(x, y, star.size, star.size);
   }
 
   requestAnimationFrame(animate);
