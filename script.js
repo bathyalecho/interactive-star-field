@@ -40,8 +40,8 @@ function animate() {
 	console.log("X is ", x)
 	console.log("Y is ", y)
 
-	if (x < 0 || x > canvas .width || y < 0 || y > canvas.height) {
-		star.distance = 0;
+	if (x < 0 || x > canvas.width || y < 0 || y > canvas.height) {
+		star.distance = 100;
 		star.angle = Math.random() * Math.PI * 2;
     }
 
